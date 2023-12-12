@@ -6,7 +6,6 @@ import {
   Outlet,
   RouterProvider,
   createBrowserRouter,
-  createMemoryRouter,
 } from 'react-router-dom';
 
 import { getRoutes } from './routes';
@@ -55,7 +54,7 @@ export function Root() {
       >
         <Toolbar variant='dense'>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Budge
+            Title
           </Typography>
           <Box>
             <IconButton sx={{ ml: 1 }} onClick={toggleTheme} color="inherit">

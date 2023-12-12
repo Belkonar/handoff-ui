@@ -3,9 +3,32 @@ import { useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { useMemo } from 'react';
 
 export default function Nav() {
   const nav = useNavigate();
+
+  const navList = [
+    {
+      label: 'Home',
+      icon: <HomeIcon />,
+      path: '/',
+    },
+  ];
+
+  const menu = useMemo(() =>
+    navList.map((item) => (
+      <ListItem key={item.label} disablePadding>
+        <ListItemButton onClick={() => nav(item.path)}>
+          <ListItemIcon>
+            {item.icon}
+          </ListItemIcon>
+          <ListItemText>
+            {item.label}
+          </ListItemText>
+        </ListItemButton>
+      </ListItem>
+    )), []);
 
   return <List
     sx={{ backgroundColor: 'background.paper' }}
@@ -15,35 +38,6 @@ export default function Nav() {
       </ListSubheader>
     }
   >
-    <ListItem disablePadding>
-      <ListItemButton onClick={() => nav('/')}>
-        <ListItemIcon>
-          <HomeIcon />
-        </ListItemIcon>
-        <ListItemText>
-          Home
-        </ListItemText>
-      </ListItemButton>
-    </ListItem>
-    <ListItem disablePadding>
-      <ListItemButton onClick={() => nav('/accounts')}>
-        <ListItemIcon>
-          <ArticleIcon />
-        </ListItemIcon>
-        <ListItemText>
-          Accounts
-        </ListItemText>
-      </ListItemButton>
-    </ListItem>
-    <ListItem disablePadding>
-      <ListItemButton onClick={() => nav('/schedules')}>
-        <ListItemIcon>
-          <CalendarMonthIcon />
-        </ListItemIcon>
-        <ListItemText>
-          Schedule
-        </ListItemText>
-      </ListItemButton>
-    </ListItem>
+    {menu}
   </List>
 }
